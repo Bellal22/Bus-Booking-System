@@ -20,6 +20,15 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * If specified, this namespace is automatically applied to your controller routes.
+     *
+     * In addition, it is set as the URL generator's root namespace.
+     *
+     * @var string
+     */
+    protected $namespace = 'App\\Http\\Controllers';
+
+    /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
      * @return void
@@ -35,6 +44,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            $this->mapAdminRoutes();
+
+            $this->mapPassengerRoutes();
         });
     }
 
@@ -48,5 +61,35 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    private function mapAdminRoutes()
+    {
+        Route::prefix('api/admins')
+            ->middleware('api')
+            ->namespace($this->namespace.'\\Api\\Admins')
+            ->group(base_path('routes/Admins/api.php'));
+    }
+
+    /**
+     * Define the "Passenger" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    private function mapPassengerRoutes()
+    {
+        Route::prefix('api/passengers')
+            ->middleware('api')
+            ->namespace($this->namespace.'\\Api\\Passengers')
+            ->group(base_path('routes/Passengers/api.php'));
     }
 }
