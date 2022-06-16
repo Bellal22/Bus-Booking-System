@@ -30,6 +30,6 @@ class PassengerReserveSeatTest extends TestCase
 
         $this->assertAuthenticated();
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
 }
