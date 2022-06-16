@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Bus;
 use App\Models\Passenger;
 use App\Models\Station;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,5 +36,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(100)->create();
 
         //$this->call(StationSeeder::class);
+
+        Bus::factory(10)->create();
     }
 }
