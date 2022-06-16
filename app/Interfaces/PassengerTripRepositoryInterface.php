@@ -10,5 +10,5 @@ interface PassengerTripRepositoryInterface
 {
     public function getTripByOriginDestination(int|string $origin_id, int|string $destination_id) : mixed;
     public function checkTripHasAvailableSeats(Trip $trip);
-    public function ReserveTrip(Trip $trip);
+    public function ReserveTrip(array $ticketRecord);
 }

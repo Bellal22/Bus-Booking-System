@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Interfaces\BusRepositoryInterface;
 use App\Models\Bus;
+use App\Models\Route;
 use App\Models\Seat;
 use App\Models\Trip;
 

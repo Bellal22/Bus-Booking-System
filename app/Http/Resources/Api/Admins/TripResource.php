@@ -19,11 +19,14 @@ class TripResource extends JsonResource
             'bus' => $this->bus->only('id','licence_number'),
             'routes' => $this->routes->map(function($route){
                 return [
-                        'id' => $route->id,
-                        'station_name' => $route->station->title,
-                        'order' => $route->order
-                    ];
-            })
+                    'id' => $route->id,
+                    'station_id' => $route->station->id,
+                    'station_name' => $route->station->title,
+                    'order' => $route->order
+                ];
+            }),
+            'seats' => $this->seats->map->only('id'),
+            'seats_no' => count($this->seats) . ' available seats'
         ];
     }
 }
