@@ -114,6 +114,11 @@ Run the database seeder and you're done
 - **Email:** admin@admin.com
 - **Password:** password 
 <h5 align="center">passenger</h5>
+
 - **Email:** passenger@passenger.com
 - **Password:** password
+
+## POSTMAN Collection
+    https://www.getpostman.com/collections/da3ca731d397f2e68f46
+
 
