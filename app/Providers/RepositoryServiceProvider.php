@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use App\Interfaces\AdminTripRepositoryInterface;
-use App\Interfaces\TripRepositoryInterface;
-use App\Repositories\TripRepository;
+use App\Interfaces\PassengerTripRepositoryInterface;
+use App\Repositories\Admin\TripRepository as AdminTripRepository;
+use App\Repositories\Passenger\TripRepository as PassengerTripRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -16,7 +17,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(AdminTripRepositoryInterface::class, TripRepository::class);
+        $this->app->bind(AdminTripRepositoryInterface::class, AdminTripRepository::class);
+        $this->app->bind(PassengerTripRepositoryInterface::class, PassengerTripRepository::class);
     }
 
     /**

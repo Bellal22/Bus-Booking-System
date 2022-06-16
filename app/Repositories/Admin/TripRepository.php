@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Admin;
 
 use App\Interfaces\AdminTripRepositoryInterface;
-use App\Models\Station;
 use App\Models\Trip;
 
 class TripRepository implements AdminTripRepositoryInterface
