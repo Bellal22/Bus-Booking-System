@@ -33,5 +33,13 @@ class Bus extends Model
         'seats_no' => self::DEFAULT_SEATS,
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
+    }
+
 
 }

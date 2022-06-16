@@ -9,7 +9,7 @@ class Trip extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['bus_id'] ;
+    protected $fillable = ['bus_id'];
 
     /**
      * get Bus related to this Trip.
@@ -29,5 +29,13 @@ class Trip extends Model
     public function routes()
     {
         return $this->hasMany(Route::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
     }
 }
