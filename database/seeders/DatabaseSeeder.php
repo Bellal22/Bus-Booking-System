@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(StationSeeder::class);
 
-        Bus::factory(10)->create();
+        //Bus::factory(10)->create();
+        //$this->call(TripSeeder::class);
     }
 }
