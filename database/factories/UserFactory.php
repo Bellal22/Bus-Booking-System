@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -17,8 +19,10 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $model = new User();
         return [
             'name' => $this->faker->name(),
+            'type' => array_rand($model->getChildTypes()),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -27,16 +31,18 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Configure the model factory.
      *
-     * @return static
+     * @return $this
      */
-    public function unverified()
+    public function configure()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
+        return $this->afterCreating(function (User $user) {
+            User::withoutEvents(function () use ($user) {
+                $user->forceFill([
+                    'email_verified_at' => now(),
+                ])->save();
+            });
         });
     }
 }

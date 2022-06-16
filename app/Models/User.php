@@ -2,15 +2,43 @@
 
 namespace App\Models;
 
+use App\Http\Resources\CustomerResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Parental\HasChildren;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasChildren;
+
+    /**
+     * The code of admin type.
+     *
+     * @var string
+     */
+    const ADMIN_TYPE = 'admin';
+
+    /**
+     * The code of chef type.
+     *
+     * @var string
+     */
+    const PASSENGER_TYPE = 'passenger';
+
+    /**
+     * @var array
+     */
+    protected $childTypes = [
+        self::ADMIN_TYPE => Admin::class,
+        self::PASSENGER_TYPE => Passenger::class,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -41,4 +69,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the resource for customer type.
+     *
+     * @return \App\Http\Resources\UserResource
+     */
+    public function getResource()
+    {
+        return new UserResource($this);
+    }
+
+    /**
+     * Get the access token currently associated with the user. Create a new.
+     *
+     * @param string|null $device
+     * @return string
+     */
+    public function createTokenForDevice($device = null)
+    {
+        $device = $device ?: 'Unknown Device';
+
+        $this->tokens()->where('name', $device)->delete();
+
+        return $this->createToken($device)->plainTextToken;
+    }
 }
