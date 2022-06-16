@@ -113,7 +113,6 @@ Run the database seeder and you're done
 
 - **Email:** admin@admin.com
 - **Password:** password 
-<br>
 <h5 align="center">passenger</h5>
 - **Email:** passenger@passenger.com
 - **Password:** password
