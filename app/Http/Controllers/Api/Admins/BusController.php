@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Apt\Admins\BusRequest;
+use App\Http\Requests\Api\Admins\BusRequest;
 use App\Http\Resources\Api\Admins\BusResource;
 use App\Models\Bus;
 use Illuminate\Http\Request;
