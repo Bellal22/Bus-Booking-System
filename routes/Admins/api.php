@@ -8,6 +8,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-Route::get('/route', function (){
-   dd('Welcome To The Admins Routing');
-});
+Route::get('/stations', [\App\Http\Controllers\Api\StationController::class , 'index']);
